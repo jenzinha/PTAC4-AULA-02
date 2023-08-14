@@ -6,6 +6,8 @@ export const middleware = (request) => {
     const token = request.cookies.get('token')?.value;
     const urlLogin = new URL('/',request.url);
 
+
+    
     const isTokenValidated = validateToken(token);
 
     if(!isTokenValidated || !token){
@@ -13,9 +15,13 @@ export const middleware = (request) => {
             return NextResponse.redirect(urlLogin);
         }
     }
+
+    if (request.nextUrl.pathname === '/pages/register' && !token) {
+        return NextResponse.redirect(urlLogin);
+    }
     NextResponse.next();
 };
 export const config = {
-    matcher: ['/', '/pages/dashboard']
+    matcher: ['/', '/pages/dashboard', '/pages/register']
 };
 
