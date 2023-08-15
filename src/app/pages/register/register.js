@@ -1,4 +1,4 @@
-export default function Registre(){
+export default function Registrar(){
     return(
         <h1>Registrar</h1>
     )
